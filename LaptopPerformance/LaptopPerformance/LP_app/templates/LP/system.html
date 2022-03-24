@@ -1,0 +1,70 @@
+{% extends 'LP/base.html' %} {% load static %} {% block content %}
+
+<section class="screen_outerbox robo">
+    <!-- bread_crumbs nav-sction -->
+    <div class="d-flex align-items-center justify-content-start mb-2 px-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active fw-bold" aria-current="page">All System</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center justify-content-between mb-2 px-1">
+        <h4 class="topic_heading_text fw-bold">
+            All System
+        </h4>
+        <div class="right_filter d-flex align-items-center col-6 justify-content-end">
+            <!-- <input type="text" class="search_bar me-2" placeholder="Search"> -->
+            <div class="dropdown">
+                <button class="btn primary_btn" type="button" id="filter_system" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <i class="ri-filter-line"></i>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item border-bottom" href="#">SSD</a></li>
+                    <li><a class="dropdown-item border-bottom" href="#">HDD</a></li>
+                    <li><a class="dropdown-item border-bottom" href="#">Both</a></li>
+                    <li><a class="dropdown-item border-bottom" href="#">RAM 8GB</a></li>
+                    <li><a class="dropdown-item " href="#">RAM 16GB</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- table of all service -->
+    <div class="mb-3 px-1">
+        <table id="system_table" class="mt-2 ui table">
+            <thead>
+                <tr>
+                    <th>Serial_no.</th>
+                    <th>Username</th>
+                    <th>RAM</th>
+                    <th>SSD</th>
+                    <th>System Configuration </th>
+                    <th>Generate Report</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for all_sys in all_sys_obj %}
+                <tr>
+                    <td>{{ all_sys.serial_no|slice:":10" }}</td>
+                    <td>{{ all_sys.username }}</td>
+                    <td>{{ all_sys.ram_size }}</td>
+                    <td>{{ all_sys.ssd_size }}</td>
+                
+                    <td><a href="{% url 'system_configuration' all_sys.serial_no  %}">
+                            <i class="ri-list-settings-line p-1"></i></a>
+                    </td>
+
+                    <td><a href="{% url 'generate_report' all_sys.serial_no %}">
+                            <i class="ri-file-list-3-line p-1"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+
+{% endblock %}

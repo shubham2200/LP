@@ -1,0 +1,181 @@
+ {% extends 'LP/base.html' %} {% load static %} {% load upperfilter %}  {% block content %}
+
+
+<section class="screen_outerbox robo">
+    <!-- <a href="{% url 'systems' %}"><i class="ri-arrow-left-line p-1 fw-bold fs-6"></i></a> -->
+    <!-- bread_crumbs nav-sction -->
+    <div class="d-flex align-items-center justify-content-start mb-2 px-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'systems' %}">All System</a></li>
+                <li class="breadcrumb-item active fw-bold" aria-current="page">
+                    System Configuration
+                </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center justify-content-between mb-2 px-1">
+        <h4 class="topic_heading_text fw-bold">System Configuration - {{ serial_no|slice:":10" }}</h4>
+        <button class="btn primary_btn small_btn d-flex align-items-center" id="download-button">
+            CSV<i class="ri-download-line ms-2"></i>
+        </button>
+    </div>
+    <!-- list of all system config -->
+    <div class="mb-3 px-1">
+        <div class="d-fle align-items-center justify-content-center shadow_box border_radius_sm table_box">
+
+            <!-- {% for j in data.items %}
+                {% for data in j %}
+                    
+                    {{data}}
+                    
+                {% endfor %}
+            {% endfor %} -->
+
+            <!-- {{data.keys}}
+        {{data.items}} -->
+
+            {% for i in data.items %}
+            <ul class="list-group list-group-horizontal w-100">
+                {% for data in i %}
+                    <li class="list-group-item text_csv text_csv">{{data}}</li>
+                {% endfor %}
+            </ul>
+            {% endfor %}
+
+            <!-- <ul class="list-group list-group-horizontal w-100">
+                <li class="list-group-item text_csv text_csv">{{ key }}</li>
+                <li class="list-group-item text_csv">{{ value }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">user name</li>
+                <li class="list-group-item text_csv">{{ user_name }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system name</li>
+                <li class="list-group-item text_csv">{{ system_name }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">Node name</li>
+                <li class="list-group-item text_csv">{{ node_name }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system release</li>
+                <li class="list-group-item text_csv">{{ system_release }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system version</li>
+                <li class="list-group-item text_csv">{{ system_version }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system machine</li>
+                <li class="list-group-item text_csv">{{ system_machine }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system processor</li>
+                <li class="list-group-item text_csv">
+                    {{ system_processor }}
+                </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system physical cores</li>
+                <li class="list-group-item text_csv">{{ system_physical_cores }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">system total cores</li>
+                <li class="list-group-item text_csv">{{ system_total_cores }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">ram size</li>
+                <li class="list-group-item text_csv">{{ ram_size }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">hdd size</li>
+                <li class="list-group-item">
+                    <div class="w-50">
+                        <div class="d-flex align-items-center justify-content-between lables_list">
+                            <label for="used HDD">{{ hdd_size }} used</label>
+                            <label for="total HDD" class="text_csv">Total - 1847.71GB</label>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">ssd size</li>
+                <li class="list-group-item">
+                    <div class="w-50">
+                        <div class="d-flex align-items-center justify-content-between lables_list">
+                            <label for="used HDD">{{ ssd_size }} used</label>
+                            <label for="total HDD" class="text_csv">Total - 256GB</label>
+                        </div>
+                        <div class="progress" style="height: 8px">
+                            <div class="progress-bar w-75" role="progressbar" aria-valuenow="70" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">total app opening time</li>
+                <li class="list-group-item text_csv">{{ total_app_opening_time }}</li>
+            </ul>
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item text_csv">last boot time</li>
+                <li class="list-group-item text_csv">{{ last_boot_time }}</li>
+            </ul> -->
+            {% comment %}
+            <ul class="list-group list-group-horizontal">
+                <li class="list-group-item">last running date</li>
+                <li class="list-group-item">2022-02-23</li>
+            </ul>
+            {% endcomment %}
+        </div>
+    </div>
+</section>
+<script>
+    // html to csv
+    function downloadCSVFile(csv, filename) {
+        var csv_file, download_link;
+        csv_file = new Blob([csv], { type: "text/csv;charset=utf-8" });
+        // csv_file = new Blob([csv], { type: "text/csv" });
+        download_link = document.createElement("a");
+        download_link.download = filename;
+        download_link.href = window.URL.createObjectURL(csv_file);
+        download_link.style.display = "none";
+        document.body.appendChild(download_link);
+        download_link.click();
+    }
+
+    document.getElementById("download-button").addEventListener("click", function () {
+        var html = document.querySelector(".table_box").outerHTML;
+        htmlToCSV(html, "SystemConfig.csv");
+    });
+
+    function htmlToCSV(html, filename) {
+        var data = [];
+        var rows = document.querySelectorAll(".table_box ul");
+
+        for (var i = 0; i < rows.length; i++) {
+            var row = [],
+                cols = rows[i].querySelectorAll(".text_csv");
+            for (var j = 0; j < cols.length; j++) {
+                var textClean = cols[j].innerText
+                    .replace(/(\r\n|\n|\r)/gm, "")
+                    .replace(/(\s\s)/gm, " ");
+                textClean = textClean.replace(/"/g, '""');
+                row.push('"' + textClean + '"');
+            }
+            data.push(row.join(","));
+        }
+        //to remove table heading
+        //data.shift()
+        downloadCSVFile(data.join("\n"), filename);
+    }
+</script>
+
+{% endblock %}

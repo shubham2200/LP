@@ -1,0 +1,11 @@
+.system_dropdown .select2-container {
+    width: 300px !important;
+}
+.heading_table{
+    background-color: var(--dark_blue);
+    color: var(--font_white);
+}
+.comparision_info{
+    background-color: var(--dark_blue);
+    color: var(--font_white);
+}

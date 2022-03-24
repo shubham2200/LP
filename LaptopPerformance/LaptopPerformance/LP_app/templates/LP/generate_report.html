@@ -1,0 +1,362 @@
+{% extends 'LP/base.html' %} {% load static %} {% block content %}
+
+<div  class="main_outer_container d-flex justify-content-start w-100 robo" id="loader">
+    <!-- {% comment %} <div id="loading"> {% endcomment %}
+        {% comment %} <img src='{% static "images/loader.gif" %}' id='load_loder'> {% endcomment %}
+    {% comment %} </div> {% endcomment %} -->
+   
+</div>
+<section class="screen_outerbox robo">
+    <!-- <a href="{% url 'systems' %}"><i class="ri-arrow-left-line p-1 fw-bold fs-6"></i></a> -->
+    <!-- bread_crumbs nav-sction -->
+    <div class="d-flex align-items-center justify-content-start mb-2 px-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'systems' %}">All System</a></li>
+                <li class="breadcrumb-item active fw-bold" aria-current="page">Generate Report</li>
+            </ol>
+        </nav>
+    </div>
+    
+    <div class="d-flex align-items-center mb-2 px-1">
+        <h4 class="topic_heading_text fw-bold">Generate Report - {{ serial_number|slice:":10" }}</h4>
+    </div>
+
+    <!-- date and filter -->
+    <div class="d-flex justify-content-between mb-3 px-1">
+        <div class="date_picker d-flex">
+            <div class="d-flex flex-column me-3">
+                <label for="from">From</label>
+                <input class="p-1" type="date" />
+            </div>
+            <div class="d-flex flex-column me-3">
+                <label for="to">To</label>
+                <input class="p-1" type="date" />
+            </div>
+            <div class="d-flex flex-column justify-content-end">
+          
+                <button class="btn primary_btn small_btn" id="genrate"  >Generate</button>
+            
+            </div>
+        </div>
+        <div class="filter_download d-flex align-items-end">
+            <div class="">
+                <!-- select 2 dropdown -->
+                <select id="genrate_date" class="select_dropdown">
+                    <option value=""></option>
+                    <option value="7">Today</option>
+                    <option value="15">Yesterday</option>
+                    <option value="30">Last Week</option>
+                    <option value="75">Last Month</option>
+                    <option value="75">Last 3 Month</option>
+                    <option value="75">Last 6 Month</option>
+                    <option value="75">Last 1 Year</option>
+                </select>
+            </div>
+            <div class="ms-3 d-flex align-items-end">
+                <button
+                    class="btn primary_btn small_btn d-flex align-items-center"
+                    id="downloadbtn"
+                    onclick="getPDF ()"
+                >
+                    PDF<i class="ri-download-line ms-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+   
+    <!-- list of all generate report -->
+    <!-- <h1 class=""> {{context}}</h1> -->
+
+    <div class="mb-3 px-1" id="Template">
+        <div class="light_bg shadow_box border_radius_sm px-3 py-3 mb-3">
+            <div class="alert alert_danger py-1 fs-6 fw-light d-flex align-items-center mb-2">
+                <i class="ri-arrow-right-s-fill me-2"></i>CPU Upgrade Recommedation
+            </div>
+
+            <div class="lists_config border-radius border mb-2 report_genrate_list">
+                <ul class="list-group list-group-horizontal w-100">
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">DateTime : &nbsp;</h5>
+                        <h5 class="fw-normal">2021-11-29 10:04:51
+                        </h5>
+                    </li>
+                    {% if user_name == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">Username : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ user_name }}</h5>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    {% if serial_number == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">Serial Number : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ serial_number }}</h5>
+                    </li>
+                    {% endif %}
+
+                    {% if system_name == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">Operating System : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ system_name }}</h5>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    {% if ssd_size == '-'  %}
+
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">SSD Size : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ ssd_size }}</h5>
+                    </li>
+                    {% endif %}
+                    {% if hdd_size == '-' %}
+                    {% else %}
+
+                    <li class="list-group-item d-flex" id="hhd">
+                        <h5 class="fw-bold">HDD Size : &nbsp;</h5>
+                        <h5 class="fw-normal" >{{ hdd_size }}</h5>
+                    </li>
+                    {% endif %}
+                </ul>
+               
+
+             
+                <ul class="list-group list-group-horizontal">
+                    {% if ram_size == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">RAM Size : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ ram_size }}</h5>
+                    </li>
+                    {% endif %}
+
+                    {% if system_total_cores == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">No. of Cores : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ system_total_cores }}</h5>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    {% if system_processor == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">Processor : &nbsp;</h5>
+                        <h5 class="fw-normal">
+                            {{ system_processor }}
+                        </h5>
+                    </li>
+                    {% endif %}
+                    {% if total_app_opening_time == '-' %}
+                    {% else %}
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">AOT : &nbsp;</h5>
+                        <h5 class="fw-normal">{{ total_app_opening_time }} Sec</h5>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="list-group list-group-horizontal">
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">From : &nbsp;</h5>
+                        <h5 class="fw-normal">2021-11-20</h5>
+                    </li>
+                    <li class="list-group-item d-flex">
+                        <h5 class="fw-bold">To : &nbsp;</h5>
+                        <h5 class="fw-normal">2021-11-29</h5>
+                    </li>
+                </ul>
+            </div>
+            <div class="border-radius border mb-2">
+                <div class=" p-3 text-center">
+                    <div class="wrapper prevent-split d-flex align-items-center justify-content-around  text-center">
+                        <div class="card border-0">
+                            <h5 class="fw-bold mb-3">Average CPU</h5>
+                            <div class="circle">
+                                <div class="bar"></div>
+                                <div class="box"><span></span></div>
+                            </div>
+                        </div>
+                        <div class="card border-0 Arg-M">
+                            <h5 class="fw-bold mb-3">Average Memory</h5>
+                            <div class="circle">
+                                <div class="bar"></div>
+                                <div class="box"><span></span></div>
+                            </div>
+                        </div>
+                        <div class="card border-0 Arg-D">
+                            <h5 class="fw-bold mb-3">Average Disk</h5>
+                            <div class="circle">
+                                <div class="bar"></div>
+                                <div class="box"><span></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="px-1 new_break">
+                <h4 class="topic_heading_text fw-bold mb-2">Installed Application</h4>
+                <div class="process_list">
+                    <ul class="list-group">
+                        <!-- header -->
+                        <li class="list-group-item process_list_heading">Process Name</li>
+                        <!-- list -->
+                        <li class="list-group-item light_danger">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="user_name">001_yadav_p</h6>
+                                <h6 class="text">Malicious exe detection.</h6>
+                            </div>
+                        </li>
+                        <li class="list-group-item light_danger">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="user_name">001_yadav_p</h6>
+                                <h6 class="text">Malicious exe detection.</h6>
+                            </div>
+                        </li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item light_danger">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="user_name">001_yadav_p</h6>
+                                <h6 class="text">Malicious exe detection.</h6>
+                            </div>
+                        </li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item">A second item</li>
+                        <li class="list-group-item light_danger">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h6 class="user_name">001_yadav_p</h6>
+                                <h6 class="text">Malicious exe detection.</h6>
+                            </div>
+                        </li>
+                        <li class="list-group-item">A second item</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 px-1 border_radius_sm light_bg shadow_box consumption_box page-break">
+            <div class="p-3">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <h4 class="fw-bold verticle-align-center">Datewise consumption</h4>
+                    <div class="filter_nav_tab me-2" id="nav_tab_btns">
+                        <ul class="nav nav-pills mb-0" id="datewise_consumption" role="tablist">
+                            <li class="nav-item me-2" role="presentation">
+                                <button
+                                    class="nav-link active py-0 px-2 fs-5"
+                                    id="table_data"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#table_tab"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="table_tab"
+                                    aria-selected="true"
+                                >
+                                    <i class="ri-table-line"></i>
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button
+                                    class="nav-link py-0 px-2 fs-5"
+                                    id="chart_data"
+                                    data-bs-toggle="pill"
+                                    data-bs-target="#chart_tab"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="chart_tab"
+                                    aria-selected="false"
+                                >
+                                    <i class="ri-bar-chart-line"></i>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content" id="datewise_consumption_tab">
+                    <div
+                        class="tab-pane fade show active"
+                        id="table_tab"
+                        role="tabpanel"
+                        aria-labelledby="table_data"
+                    >
+                        <table id="" class="table custom_table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Avg CPU</th>
+                                    <th>Avg Disk</th>
+                                    <th>Avg Memory</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                                <tr>
+                                    <td>2021-11-20</td>
+                                    <td>256</td>
+                                    <td>246</td>
+                                    <td>246</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="chart_tab"
+                        role="tabpanel"
+                        aria-labelledby="chart_data"
+                    >
+                        <div class="d-flex justify-content-center">
+                            <div class="p-0 pb-1" style="border: 1px solid var(--input_bg)">
+                                <div id="datewise_chart" style="height: 380px; width: 1100px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="{% static 'js/chartjs.js' %}"></script>
+
+{% endblock %}

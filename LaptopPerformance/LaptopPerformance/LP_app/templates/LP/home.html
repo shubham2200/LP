@@ -1,0 +1,372 @@
+{% extends 'LP/base.html' %} {% load static %} {% block content %}
+ {% load mathfilters %}
+
+<!-- bread_crumbs nav-sction -->
+<section class="screen_outerbox dashboard_size" id="home_page">
+  <!-- cards of homeScreen -->
+  <div class="d-flex align-items-center mb-2 p-0">
+    <div class="w-25 px-2">
+      <div class="h-100 card border_radius_sm shadow_box home_cards card1">
+        <div class="card-body d-flex flex-column justify-content-between py-2">
+          <h5 class="card-title fw-normal">
+            No. of System connected with server
+          </h5>
+          <div class="d-flex align-items-center justify-content-between mt-0">
+
+            <h2 class="mt-2">{{ context.no_of_system_connect_with_server }} </h2>
+            <!-- <h4 class="mt-2"><i class="ri-arrow-right-s-line"></i></h4> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-25 px-2">
+      <div class="h-100 card border_radius_sm shadow_box home_cards card2">
+        <div class="card-body d-flex flex-column justify-content-between py-2">
+          <h5 class="card-title fw-normal">No.of data received</h5>
+          <div class="d-flex align-items-center justify-content-between mt-0">
+            <h2 class="mt-2">{{ context.no_of_data_received }}</h2>
+            <!-- <h4 class="mt-2"><i class="ri-arrow-right-s-line"></i></h4> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-25 px-2">
+      <div class="h-100 card border_radius_sm shadow_box home_cards card3">
+        <div class="card-body d-flex flex-column justify-content-between py-2">
+          <h5 class="card-title fw-normal">No.of data not received.</h5>
+          <div class="d-flex align-items-center justify-content-between mt-0">
+            <h2 class="mt-2">{{  context.no_of_data_not_received }}</h2>
+            <!-- <h4 class="mt-2"><i class="ri-arrow-right-s-line"></i></h4> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="w-25 px-2">
+      <div class="h-100 card border_radius_sm shadow_box home_cards card4">
+        <div class="card-body d-flex flex-column justify-content-between py-2">
+          <h5 class="card-title fw-normal">Total Users</h5>
+          <div class="d-flex align-items-center justify-content-between mt-0">
+            <h2 class="mt-2">{{ context.total_users }}</h2>
+            <!-- <h4 class="mt-2"><i class="ri-arrow-right-s-line"></i></h4> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary of homeScreen -->
+  <div class="px-1 mb-2">
+    <div class="d-flex align-items-center justify-content-between mb-2">
+      <h4 class="topic_heading_text fw-bold">Summary</h4>
+      <!-- select 2 dropdown -->
+      <select id="summary_date" class="select_dropdown">
+        {% comment %}
+        <option value=""></option>
+        {% endcomment %}
+        <option value="7">7 Days</option>
+        <option value="15">15 Days</option>
+        <option value="30">30 Days</option>
+        <option value="75">75 Days</option>
+      </select>
+    </div>
+    <div class="graphs_box d-flex align-items-center justify-content-between">
+      <div class="w-50 pe-2 h-100">
+        <div class="chart_box border border-radius p-3 pb-0">
+          <div
+            class="chart_heading d-flex align-items-center justify-content-between"
+          >
+            <h5 class="fw-normal">Data Summary</h5>
+            <h6 class="fw-light">Total No. of user - {{ context.total_users }}</h6>
+          </div>
+          <div
+            class="chart_heading d-flex align-items-center justify-content-center"
+          >
+            <div
+              class="chart_draw d-flex align-items-center justify-content-center"
+            >
+              <canvas id="data_summary"></canvas>
+            </div>
+            <div
+              class="chart_label h-100 d-flex flex-column align-items-start justify-content-center"
+            >
+              <h6 class="d-flex align-items-center mb-1" id="dta_rcv">
+                <i
+                  class="ri-checkbox-blank-fill me-2 fs-5"
+                  style="color: var(--card_bg1)"
+                ></i
+                >{{ context.no_of_data_received }} data received
+              </h6>
+              <h6 class="d-flex align-items-center mb-1" id="dta_nt_rcve">
+                <i
+                  class="ri-checkbox-blank-fill me-2 fs-5"
+                  style="color: var(--card_bg2)"
+                ></i
+                >{{ context.no_of_data_not_received }} data not received
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-50 ps-2 h-100">
+        <div class="chart_box border border-radius p-3 pb-0">
+          <div
+            class="chart_heading d-flex align-items-center justify-content-between"
+          >
+            <h5 class="fw-normal">Server Summary</h5>
+            <h6 class="fw-light">Total No. of user - {{ context.total_users }}</h6>
+          </div>
+          <div
+            class="chart_heading d-flex align-items-center justify-content-center"
+          >
+            <div
+              class="chart_draw d-flex align-items-center justify-content-center"
+            >
+              <canvas id="server_summary"></canvas>
+            </div>
+            <div
+              class="chart_label h-100 d-flex flex-column align-items-start justify-content-center"
+            >
+              <h6 class="d-flex align-items-center mb-1" id="sys_conct">
+                <i
+                  class="ri-checkbox-blank-fill me-2 fs-5"
+                  style="color: var(--card_bg1)"
+                ></i
+                >
+                <!-- {{ no_of_system_connect_with_server }} -->
+                 System Connected to
+                server
+              </h6>
+              <h6 class="d-flex align-items-center mb-1" id="sys_not_conct">
+                <i
+                  class="ri-checkbox-blank-fill me-2 fs-5"
+                  style="color: var(--card_bg2)"
+                ></i>
+                {{context.no_of_system_connect_with_server}}
+                System not Connected to server
+              </h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tables of homeScreen -->
+  <div class="px-1">
+    <div class="d-flex align-items-start justify-content-between">
+      <div class="w-50 table_box">
+        <div class="pe-2">
+          <h4 class="topic_heading_text fw-bold">Data Received</h4>
+          <table id="data_recived" class="mt-1">
+            <thead>
+              <tr>
+                <th>Serial_no.</th>
+                <th>Username</th>
+                <th>Timespam</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for all in all %}
+              <tr>
+                <td>{{all.serial_no|slice:":10"}}</td>
+                <td>{{all.username}}</td>
+
+                <td>{{all.timestamp|time}}</td>
+              </tr>
+              {% endfor %}
+           
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="w-50 table_box">
+        <div class="ps-2">
+          <h4 class="topic_heading_text fw-bold">Data Not Received</h4>
+          <table id="data_not_recived" class="mt-1">
+            <thead>
+              <tr>
+                <th>Serial_no.</th>
+                <th>Username</th>
+                <th>Days</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for all in all %}
+                <tr>
+                  <td>{{all.serial_no|slice:":10"}}</td>
+                  <td>{{all.username}}</td>
+  
+                  <td>{{all.timestamp|timesince|slice:"0:7" }}</td>
+                
+      
+                <td>
+                  <a role="button" class="me-4 eyes_data" n_id="{{all.username}}"  data-bs-toggle="info" id="eyes{{forloop.counter}}"
+                    ><i class="ri-eye-line p-1" ></i
+                  ></a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{% static 'js/home.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+
+<script>
+  $("#summary_date").on("change", function () {
+    let getdatefilter = $(this).val();
+    console.log(getdatefilter, 294);
+    data = {
+      getdatefilter: getdatefilter,
+    };
+    $.ajax({
+      method: "GET",
+      url: '{% url "get_filtering_date" %}',
+      // url: '{% url "get_graph_data" %}',
+      data: data,
+
+      success: function (data) {
+        console.log(data.data_recieved);
+        console.log(data, "asscacac");
+        // $('#dta_rcv').html(data.data_recieved +    'data received')
+
+        $("#dta_rcv").html(`
+                    <i
+                        class="ri-checkbox-blank-fill me-2 fs-5"
+                        style="color: var(--card_bg1)"
+                    ></i
+                    >${data.data_recieved} data received`);
+
+        $("#dta_nt_rcve").html(
+          `<i
+                        class="ri-checkbox-blank-fill me-2 fs-5"
+                        style="color: var(--card_bg2)"
+                        ></i
+                    >${data.not_recieved} data not received`
+        );
+
+        $("#sys_conct").html(
+          `<i
+                                    class="ri-checkbox-blank-fill me-2 fs-5"
+                                    style="color: var(--card_bg1)"
+                                ></i
+                                >${data.system_connected} System Connected to server`
+        );
+
+        $("#sys_not_conct").html(
+          `<i
+                                    class="ri-checkbox-blank-fill me-2 fs-5"
+                                    style="color: var(--card_bg2)"
+                                ></i
+                                >${data.system_not_connected} System not Connected to server`
+        );
+
+        // console.log(not_recieved)
+        // this is pie chart data Summary
+        let label1_1 = "data received";
+        let label1_2 = "data not received";
+        var config = {
+          type: "doughnut",
+          data: {
+            labels: [label1_1, label1_2],
+            datasets: [
+              {
+                label: "data received vs data not received",
+                data: [data.data_recieved, data.not_recieved],
+                backgroundColor: ["#0C4979", "#39D5D5"],
+                borderColor: ["#0C4979", "#39D5D5"],
+                hoverBorderColor: ["#fff", "#fff"],
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            cutout: 40,
+            responsive: true,
+            legend: {
+              display: false,
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                bodyFont: {
+                  size: 8,
+                  wordBreak: "break",
+                },
+              },
+            },
+            layout: {
+              padding: {
+                left: 0,
+                right: 50,
+                top: 0,
+                bottom: 0,
+              },
+            },
+          },
+        };
+        // this is pie chart server Summary
+        let label2_1 = "System connected";
+        let label2_2 = "System not connected";
+        var config1 = {
+          type: "doughnut",
+          data: {
+            labels: [label2_1, label2_2],
+            datasets: [
+              {
+                label: "System connected vs System not connected",
+                data: [data.system_connected, data.system_not_connected],
+                backgroundColor: ["#0C4979", "#39D5D5"],
+                borderColor: ["#0C4979", "#39D5D5"],
+                hoverBorderColor: ["#fff", "#fff"],
+                borderWidth: 2,
+              },
+            ],
+          },
+          options: {
+            cutout: 40,
+            responsive: true,
+            legend: {
+              display: false,
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                bodyFont: {
+                  size: 8,
+                  wordBreak: "break",
+                },
+              },
+            },
+            layout: {
+              padding: {
+                left: 0,
+                right: 50,
+                top: 0,
+                bottom: 0,
+              },
+            },
+          },
+        };
+
+        var ctx = document.getElementById("data_summary").getContext("2d");
+        const myPie = new Chart(ctx, config);
+
+        var ctx1 = document.getElementById("server_summary").getContext("2d");
+        const myPie2 = new Chart(ctx1, config1);
+      },
+    });
+  });
+</script>
+
+{% endblock %}

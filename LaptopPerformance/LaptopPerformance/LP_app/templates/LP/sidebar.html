@@ -1,0 +1,51 @@
+{% load static %}
+<div class="left_side sidebar_container">
+    <div class="logo_img_box d-flex align-items-center w-100 justify-content-center">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="Brand" class="logo_img">
+        </a>
+    </div>
+    <div class="user_img_box d-flex flex-column align-items-center justify-content-center mt-3">
+        <div class="user_img_outer">
+            <img src="{% static 'images/user.png' %}" alt="User" class="user_img">
+        </div>
+        <div class="user_down_text text-center">
+            <h5 class="user_name mt-2 mb-0 fw-bold">Ava Gardner</h5>
+            <h6 class="user_status">Super Admin</h6>
+        </div>
+    </div>
+    <div class="menu_links mt-4">
+        <ul class="menu_list p-0 nav navbar-nav">
+            <li class="menu_options {% if request.resolver_match.url_name == "home" %}active{% endif %}">
+                <a href="{% url 'home' %}" class="pe-3 py-2 w-100 d-flex align-items-center menu_link">
+                    <i class="ri-home-2-line me-3"></i>Home</a>
+            </li>
+            <li class="menu_options  {% if request.resolver_match.url_name == "systems" or request.resolver_match.url_name == "system_configuration" or request.resolver_match.url_name == "generate_report"  %}active{% endif %}">
+                <a href="{% url 'systems' %}" class="pe-3 py-2 w-100 d-flex align-items-center menu_link">
+                    <i class="ri-computer-line me-3"></i>All Systems</a>
+            </li>
+            <li class="menu_options  {% if request.resolver_match.url_name == "p2p_comparison" or request.resolver_match.url_name == "peak_detection" %}active{% endif %}">
+                <div class="dropdown">
+                    <a class="dropdown-toggle d-flex align-items-center menu_link justify-content-between pe-3 py-2 w-100" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="text_link"><i class="ri-bar-chart-line me-3"></i>Analysis</div>
+                    </a>
+                    <ul class="dropdown-menu menu_dropdown p-0" aria-labelledby="dropdownMenuLink">
+                        <li class="px-0 submenu {% if request.resolver_match.url_name == "p2p_comparison" %}active{% endif %}">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{% url 'p2p_comparison' %}">
+                                Peer-to-peer Comparsion <i class="ri-table-2"></i>
+                            </a>
+                        <li>
+                        <li class="px-0 submenu {% if request.resolver_match.url_name == "peak_detection" %}active{% endif %}">
+                            <a class="dropdown-item d-flex align-items-center justify-content-between" href="{% url 'peak_detection' %}">
+                                Peak Detection<i class="ri-bar-chart-fill"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="left_side h-100">
+</div>

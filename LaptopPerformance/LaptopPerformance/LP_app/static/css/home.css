@@ -1,0 +1,77 @@
+.home_cards{
+    color: var(--white);
+}
+.card1{
+    background-color: var(--card_bg1);
+}
+.card2{
+    background-color: var(--card_bg2);
+}
+.card3{
+    background-color: var(--card_bg3);
+}
+.card4{
+    background-color: var(--card_bg4);
+}
+.topic_heading_text{
+    padding: 5px 0 5px 8px;
+    border-left: 4px solid var(--dark_blue);
+    color: var(--dark_blue);
+}
+
+.summary_dropdown{
+    width: 175px;
+}
+.dropdown-item:focus{
+    background-color: var(--dark_blue);
+    color: var(--white) !important;
+}
+.dropdown-item:active{
+    color: var(--dark_blue);
+}
+.chart_draw{
+    width: 25% !important;
+}
+.chart_label{
+    width: 60% !important;
+}
+
+
+.select_dropdown{
+    width: 180px !important;
+}
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+    background-color: var(--dark_blue);
+    color: var(--white);
+}
+.select2-container--default .select2-results__option--selected {
+    color: var(--dark_blue);
+    background-color: var(--white);
+    font-weight: 600;
+}
+.select2-container--default .select2-results__option--selected:hover {
+    color: var(--dark_blue);
+    background-color: var(--white);
+}
+
+/* data tables */
+table.dataTable thead th, table.dataTable thead td {
+    padding: 10px 12px;
+    border-bottom: none;
+}
+table.dataTable tbody td {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.272);
+    padding: 15px 12px;
+    font-size: 0.85rem;
+}
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border: 1px solid var(--light_dark_font);
+    border-radius: 4px;
+    box-shadow: 5px 5px 10px rgba(128, 128, 128, 0.172);
+}
+.dashboard_size{
+    height: 100%;
+}

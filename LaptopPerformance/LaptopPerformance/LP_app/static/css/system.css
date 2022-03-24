@@ -1,0 +1,233 @@
+.search_bar {
+    border: none;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-image: url(/static/css/search.png.png);
+    background-repeat: no-repeat !important;
+    background-position: left 0.5rem center !important;
+    background-size: 12px 13px !important;
+    padding: 0.5rem 0.75rem !important;
+    padding-left: 30px !important;
+    background-color: var(--input_bg);
+    transition: all 0.15s linear;
+}
+
+.search_bar:focus {
+    box-shadow: none !important;
+    border: none;
+    outline: none;
+    background-image: none;
+    padding-left: 0.75rem !important;
+    padding-right: 30px !important;
+}
+.dropdown-menu {
+    font-size: unset;
+}
+/* datatable */
+.dataTables_length {
+    display: none;
+}
+.dataTables_wrapper .dataTables_filter {
+    margin-right: 42px;
+    float: right;
+    text-align: right;
+    margin-top: -42px;
+    margin-bottom: 0.6rem;
+}
+.dataTables_wrapper .dataTables_filter label input {
+    border: none;
+    background-color: var(--input_bg);
+    border-radius: 4px;
+    background-image: url(/static/css/search.png.png);
+    background-repeat: no-repeat !important;
+    background-position: left 0.5rem center !important;
+    background-size: 12px 13px !important;
+    padding: 0.5rem 0.75rem !important;
+    transition: all 0.15s linear;
+    padding-left: 30px !important;
+}
+.dataTables_wrapper .dataTables_filter label input:focus {
+    box-shadow: none !important;
+    border: none;
+    outline: none;
+    background-image: none;
+    padding-left: 0.75rem !important;
+    padding-right: 30px !important;
+}
+.dataTables_paginate {
+    margin-top: 0.5rem;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current,
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: var(--dark_blue) !important;
+    border: 1px solid var(--dark_blue);
+    background-color: var(--white) !important;
+    background: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: var(--white) !important;
+    border: 1px solid var(--dark_blue);
+    background-color: var(--dark_blue) !important;
+    background: none;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover,
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    cursor: default;
+    color: var(--input_bg) !important;
+    border: 1px solid transparent;
+    background: transparent !important;
+    box-shadow: none;
+}
+
+/* config */
+.list-group-horizontal li:nth-child(1) {
+    width: 30%;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.list-group-horizontal li:nth-child(2) {
+    width: 70%;
+}
+.report_genrate_list .list-group-horizontal li:nth-child(1) {
+    width: 50%;
+    font-weight: normal;
+    text-transform: none;
+}
+.report_genrate_list .list-group-horizontal li:nth-child(2) {
+    width: 50%;
+    font-weight: normal;
+    text-transform: none;
+}
+.lables_list {
+    font-size: 0.6rem;
+}
+.list-group-item {
+    border: none;
+}
+.list-group.list-group-horizontal:not(last) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.088);
+    border-radius: 0;
+}
+.progress-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    color: var(--font_white);
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--dark_blue);
+    transition: width 0.6s ease;
+}
+.progress {
+    background-color: var(--light_dark_font);
+}
+
+/* generate report */
+.small_btn {
+    border-radius: 2px;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+}
+.small_btn_diff {
+    border-radius: 2px;
+    padding: 7px 10px;
+    font-size: 0.8rem;
+}
+.select2-container .select2-selection--single {
+    height: 34px;
+    padding: 3px 0px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    height: 33px;
+}
+
+.alert_danger {
+    background-color: var(--danger);
+    color: var(--font_white);
+}
+
+.generate_charts {
+    max-width: 400px;
+}
+.process_list_heading {
+    background-color: var(--dark_blue);
+    color: var(--white);
+}
+.process_list .list-group-item {
+    margin-bottom: 7px;
+    border-top: 1px solid var(--input_bg);
+}
+.light_danger {
+    background-color: var(--light_danger_bg);
+}
+.light_bg {
+    background-color: var(--white);
+}
+.consumption_box .nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: var(--dark_blue);
+    border-color: var(--dark_blue);
+}
+
+.consumption_box .nav-link {
+    border: 1px solid var(--black);
+    color: var(--font_black);
+}
+
+/* custom table */
+.custom_table.table > :not(:last-child) > :last-child > * {
+    border: none;
+    background: var(--dark_blue);
+    color: var(--white);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.custom_table.table > :not(caption) > * > * {
+    border-bottom-width: 0;
+    background: rgba(57, 213, 213, 0.03);
+}
+
+/* donut chart progressbar */
+.wrapper .card .circle {
+    position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    cursor: default;
+}
+.card .circle .box,
+.card .circle .box span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.card .circle .box {
+    height: 100%;
+    width: 100%;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0.7);
+    transition: all 0.2s;
+}
+.card .circle:hover .box {
+    transform: translate(-50%, -50%) scale(0.75);
+}
+.wrapper .card .text {
+    color: #000;
+}
+.circle .box span {
+    font-size: 30px;
+    font-family: sans-serif;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s;
+}
+.card .circle:hover .box span {
+    transform: translate(-45%, -45%) scale(1.09);
+}
+
+.plotlyjsicon{
+    display: none;
+}

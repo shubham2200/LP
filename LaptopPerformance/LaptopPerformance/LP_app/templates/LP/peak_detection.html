@@ -1,0 +1,79 @@
+{% extends 'LP/base.html' %} {% load static %} {% block content %}
+
+<section class="screen_outerbox robo">
+    <!-- <a href="{% url 'home' %}"><i class="ri-arrow-left-line p-1 fw-bold fs-6"></i></a> -->
+    <!-- bread_crumbs nav-sction -->
+    <div class="d-flex align-items-center justify-content-start mb-2 px-1">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                <li class="breadcrumb-item active">Analysis</li>
+                <li class="breadcrumb-item active fw-bold" aria-current="page">Peak Detection</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex align-items-center mb-2 px-1">
+        <h4 class="topic_heading_text fw-bold">Analysis</h4>
+    </div>
+    <div class="mb-3 px-1">
+        <div class="system_selection d-flex align-items-end justify-content-start mb-3">
+            <div class="system_dropdown d-flex flex-column me-4">
+                <h5 class="mb-1" for="system1">Select system</h5>
+                <select id="system_peak_selector" class="select_dropdown">
+                    <option value=""></option>
+                    <option value="7">dell</option>
+                    <option value="15">HP28</option>
+                    <option value="30">dell121_H</option>
+                    <option value="75">ASUS 12_1</option>
+                </select>
+            </div>
+            <div class="date_picker d-flex">
+                <div class="d-flex flex-column me-2">
+                    <h5 class="mb-1" for="from">From</h5>
+                    <input
+                        type="date"
+                        name="from"
+                        style="
+                            padding: 6.5px 12px !important;
+                            border-radius: 4px;
+                            outline: none !important;
+                            border: 1px solid #aaa !important;
+                        "
+                    />
+                </div>
+                <div class="d-flex flex-column me-2">
+                    <h5 class="mb-1" for="to">To</h5>
+                    <input
+                        type="date"
+                        name="to"
+                        style="
+                            padding: 6.5px 12px !important;
+                            border-radius: 4px;
+                            outline: none !important;
+                            border: 1px solid #aaa !important;
+                        "
+                    />
+                </div>
+                <div class="d-flex flex-column justify-content-end">
+                    <button
+                        class="btn primary_btn px-3 h5"
+                        style="padding: 6px 10px; border-radius: 3px"
+                    >
+                        SHOW
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="system_selection d-flex align-items-end justify-content-start mb-2">
+            
+        </div> -->
+        <div class="peak_chart light_bg shadow_box d-flex justify-content-center border-radius">
+            <div class="px-5 pb-3 w-100" style="border: 1px solid var(--input_bg)">
+                <div id="peak_detection_chart" style="height: 380px width: 100%; max-width: 1500px"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'js/peakChart.js' %}"></script>
+
+{% endblock %}
